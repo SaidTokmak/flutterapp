@@ -175,9 +175,9 @@ class _CreateTaskState extends State<CreateTask> {
       result = await DatabaseHelper().insertTask(task);
     }
     if(result != null) {
-      _showAlertDialog('Status','Task başarıyla kaydedildi.');
+      _showAlertDialog('Bilgilendirme','Task başarıyla kaydedildi.');
     }else{
-      _showAlertDialog('Status','Task başarıyla kaydedildi.');
+      _showAlertDialog('Bilgilendirme','Task başarıyla kaydedildi.');
     }
     
   }
