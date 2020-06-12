@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/model/Task.dart';
-import 'package:intl/intl.dart';
 import 'package:myapp/pages/CreateEditTask.dart';
 import 'package:myapp/utils/database_helper.dart';
 import 'package:sqflite/sqflite.dart';
@@ -61,13 +60,15 @@ class _TaskListState extends State<TaskList> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 4.0),
                   child: Row(children: <Widget>[
-                    Text(
-                      task.title,
-                      overflow: TextOverflow.ellipsis,
-                      style: new TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                          wordSpacing: 10.0),
+                    Container(
+                      width: 270,
+                      child : Text(
+                        task.title,
+                        overflow: TextOverflow.ellipsis,
+                        style: new TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold),
+                      )
                     ),
                     Spacer(),
                     Text(task.date),
