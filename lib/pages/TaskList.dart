@@ -157,6 +157,14 @@ class _TaskListState extends State<TaskList> {
   }
 
   void _showAlertDialog(BuildContext context,Task task) {
+    
+      String taskTitle;
+
+      if(task.title.isNotEmpty && task.title != null){
+        taskTitle = task.title;
+      }else{
+        taskTitle = "Seçili ";
+      }
 
       Widget cancelButton = FlatButton(
         child: Text("Sil"),
@@ -174,8 +182,8 @@ class _TaskListState extends State<TaskList> {
       );
 
       AlertDialog alert = AlertDialog(
-        title: Text("Bilgilendirme"),
-        content: Text("Bu taskı silmek istediğinize emin misiniz?"),
+        title: Text("Uyarı"),
+        content: Text(taskTitle + " taskını silmek istediğine emin misin?"),
         actions: [
           cancelButton,
           continueButton,
