@@ -91,7 +91,7 @@ class _TaskListState extends State<TaskList> {
                         color: Colors.redAccent,
                         onPressed: () {
                           setState(() {
-                            _delete(context, task);
+                            _showAlertDialog(context,task);
                           });
                         })
                   ]),
@@ -155,4 +155,73 @@ class _TaskListState extends State<TaskList> {
       });
     });
   }
+
+  void _showAlertDialog(BuildContext context,Task task) {
+
+      Widget cancelButton = FlatButton(
+        child: Text("Sil"),
+        onPressed:  () {
+          _delete(context, task);
+          Navigator.of(context, rootNavigator: true).pop('dialog');
+        },
+      );
+
+      Widget continueButton = FlatButton(
+        child: Text("İptal Et"),
+        onPressed:  () {
+          Navigator.of(context, rootNavigator: true).pop('dialog');
+        },
+      );
+
+      AlertDialog alert = AlertDialog(
+        title: Text("Bilgilendirme"),
+        content: Text("Bu taskı silmek istediğinize emin misiniz?"),
+        actions: [
+          cancelButton,
+          continueButton,
+        ],
+      );
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
+}
+
+/*Future<void> _showAlertDialog(BuildContext context,Task task) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Bilgilendirme'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Bu taskı silmek istediğinize emin misiniz?'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+        FlatButton(
+        child: Text("İptal Et"),
+        onPressed:  () {
+          Navigator.of(context).pop('dialog');
+        },
+      ),
+      FlatButton(
+        child: Text("Sil"),
+        onPressed:  () {
+          _delete(context, task);
+          Navigator.of(context).pop('dialog');
+        },
+      )
+        ],
+      );
+    },
+  );
+}*/
 }
