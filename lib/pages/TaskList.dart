@@ -85,17 +85,15 @@ class _TaskListState extends State<TaskList> {
                   padding: const EdgeInsets.only(top: 4.0),
                   child: Row(children: <Widget>[
                     Flexible(
-                      flex: 5,
+                      flex: 8,
                       fit: FlexFit.tight,
                       child: Text(
                         task.description,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Align(alignment: Alignment.centerRight,
-                    child:Flexible(
+                    Flexible(
                       flex: 1,
-                      fit: FlexFit.loose,
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: IconButton(
@@ -109,8 +107,7 @@ class _TaskListState extends State<TaskList> {
                           }
                         ),
                       ),
-                    ),
-                    ),
+                    )
                   ]),
                 ),
               ],
