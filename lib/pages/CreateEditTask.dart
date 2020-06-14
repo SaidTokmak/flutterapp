@@ -66,6 +66,7 @@ class _CreateTaskState extends State<CreateTask> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    maxLength: 20,
                     controller: titleController,
                     onChanged: (value){
                       updateTitle();
@@ -75,12 +76,15 @@ class _CreateTaskState extends State<CreateTask> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
+                      counter: SizedBox(height: 0.0,), //bunu silersen text alanının altında yazdıpın karakter ve max karakter sayıları gözüküyor
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    minLines: 1,
+                    maxLines: 4,
                     controller: descriptionController,
                     onChanged: (value){
                       updateDesc();
