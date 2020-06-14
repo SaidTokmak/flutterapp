@@ -60,8 +60,9 @@ class _TaskListState extends State<TaskList> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 4.0),
                   child: Row(children: <Widget>[
-                    Container(
-                      width: 270,
+                    Flexible(
+                      flex: 3,
+                      fit: FlexFit.tight,
                       child : Text(
                         task.title,
                         overflow: TextOverflow.ellipsis,
@@ -70,30 +71,46 @@ class _TaskListState extends State<TaskList> {
                             fontWeight: FontWeight.bold),
                       )
                     ),
-                    Spacer(),
-                    Text(task.date),
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.loose,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(task.date)
+                      ),
+                    ),
                   ]),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: Row(children: <Widget>[
-                    Container(
-                      width: 300,
+                    Flexible(
+                      flex: 5,
+                      fit: FlexFit.tight,
                       child: Text(
                         task.description,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Spacer(),
-                    IconButton(
-                        iconSize: 20,
-                        icon: Icon(Icons.delete_outline),
-                        color: Colors.redAccent,
-                        onPressed: () {
-                          setState(() {
-                            _showAlertDialog(context,task);
-                          });
-                        })
+                    Align(alignment: Alignment.centerRight,
+                    child:Flexible(
+                      flex: 1,
+                      fit: FlexFit.loose,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: IconButton(
+                          iconSize: 20,
+                          icon: Icon(Icons.delete_outline),
+                          color: Colors.redAccent,
+                          onPressed: () {
+                            setState(() {
+                              _showAlertDialog(context,task);
+                            });
+                          }
+                        ),
+                      ),
+                    ),
+                    ),
                   ]),
                 ),
               ],
