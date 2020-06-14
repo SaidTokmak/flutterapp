@@ -60,8 +60,9 @@ class _TaskListState extends State<TaskList> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 4.0),
                   child: Row(children: <Widget>[
-                    Container(
-                      width: 270,
+                    Flexible(
+                      flex: 3,
+                      fit: FlexFit.tight,
                       child : Text(
                         task.title,
                         overflow: TextOverflow.ellipsis,
@@ -70,30 +71,43 @@ class _TaskListState extends State<TaskList> {
                             fontWeight: FontWeight.bold),
                       )
                     ),
-                    Spacer(),
-                    Text(task.date),
+                    Flexible(
+                      flex: 1,
+                      fit: FlexFit.loose,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(task.date)
+                      ),
+                    ),
                   ]),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: Row(children: <Widget>[
-                    Container(
-                      width: 300,
+                    Flexible(
+                      flex: 8,
+                      fit: FlexFit.tight,
                       child: Text(
                         task.description,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Spacer(),
-                    IconButton(
-                        iconSize: 20,
-                        icon: Icon(Icons.delete_outline),
-                        color: Colors.redAccent,
-                        onPressed: () {
-                          setState(() {
-                            _delete(context, task);
-                          });
-                        })
+                    Flexible(
+                      flex: 1,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: IconButton(
+                          iconSize: 20,
+                          icon: Icon(Icons.delete_outline),
+                          color: Colors.redAccent,
+                          onPressed: () {
+                            setState(() {
+                              _showAlertDialog(context,task);
+                            });
+                          }
+                        ),
+                      ),
+                    )
                   ]),
                 ),
               ],
@@ -155,4 +169,81 @@ class _TaskListState extends State<TaskList> {
       });
     });
   }
+
+  void _showAlertDialog(BuildContext context,Task task) {
+    
+      String taskTitle;
+
+      if(task.title.isNotEmpty && task.title != null){
+        taskTitle = task.title;
+      }else{
+        taskTitle = "Seçili ";
+      }
+
+      Widget cancelButton = FlatButton(
+        child: Text("Sil"),
+        onPressed:  () {
+          _delete(context, task);
+          Navigator.of(context, rootNavigator: true).pop('dialog');
+        },
+      );
+
+      Widget continueButton = FlatButton(
+        child: Text("İptal Et"),
+        onPressed:  () {
+          Navigator.of(context, rootNavigator: true).pop('dialog');
+        },
+      );
+
+      AlertDialog alert = AlertDialog(
+        title: Text("Uyarı"),
+        content: Text(taskTitle + " taskını silmek istediğine emin misin?"),
+        actions: [
+          cancelButton,
+          continueButton,
+        ],
+      );
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
+}
+
+/*Future<void> _showAlertDialog(BuildContext context,Task task) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Bilgilendirme'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Bu taskı silmek istediğinize emin misiniz?'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+        FlatButton(
+        child: Text("İptal Et"),
+        onPressed:  () {
+          Navigator.of(context).pop('dialog');
+        },
+      ),
+      FlatButton(
+        child: Text("Sil"),
+        onPressed:  () {
+          _delete(context, task);
+          Navigator.of(context).pop('dialog');
+        },
+      )
+        ],
+      );
+    },
+  );
+}*/
 }

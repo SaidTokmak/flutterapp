@@ -10,7 +10,7 @@ class  HomePageState extends State <HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Backgraund İmage'),
+        title: Text('TaskingMe!'),
       ),
       body: Container(
         decoration: BoxDecoration(
